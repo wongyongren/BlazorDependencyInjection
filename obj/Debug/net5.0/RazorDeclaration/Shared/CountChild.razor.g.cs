@@ -95,6 +95,7 @@ using BlazorDependencyInjection.Shared;
     private void IncrementCount()
     {
         myCounter.MyCounterValue++;
+
     }
 
 
