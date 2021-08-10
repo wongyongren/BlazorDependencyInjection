@@ -90,19 +90,15 @@ using BlazorDependencyInjection.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 11 "C:\Users\user\source\repos\BlazorDependencyInjection\Shared\CountChild.razor"
+#line 10 "C:\Users\user\source\repos\BlazorDependencyInjection\Shared\CountChild.razor"
        
-    private void IncrementCount()
-    {
-        myCounter.MyCounterValue++;
-
-    }
+    [CascadingParameter]
+    private CountModel currentCount { get; set; }
 
 
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private SingletonCounter myCounter { get; set; }
     }
 }
 #pragma warning restore 1591

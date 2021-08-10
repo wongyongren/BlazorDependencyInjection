@@ -31,7 +31,8 @@ namespace BlazorDependencyInjection
             services.AddSingleton<WeatherForecastService>();
 
             //services.AddSingleton((fac) => new SingletonCounter());
-            services.AddSingleton<SingletonCounter>();
+            //services.AddSingleton<SingletonCounter>();
+            services.AddSingleton<CountModel>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

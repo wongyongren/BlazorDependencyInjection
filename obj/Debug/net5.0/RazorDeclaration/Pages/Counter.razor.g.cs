@@ -83,7 +83,7 @@ using BlazorDependencyInjection.Shared;
 #line hidden
 #nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/counter")]
-    public partial class Counter : Microsoft.AspNetCore.Components.ComponentBase
+    public partial class Counter : Microsoft.AspNetCore.Components.ComponentBase, IDisposable
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -91,17 +91,23 @@ using BlazorDependencyInjection.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 12 "C:\Users\user\source\repos\BlazorDependencyInjection\Pages\Counter.razor"
+#line 13 "C:\Users\user\source\repos\BlazorDependencyInjection\Pages\Counter.razor"
        
-    private void IncrementCount()
+    private CountModel currentCount = new CountModel();
+    
+    protected override void OnInitialized()
     {
-        myCounter.MyCounterValue++;
+        currentCount.PropertyChanged += (sender, args) => StateHasChanged();
+    }
+    
+    public void Dispose()
+    {
+        currentCount.PropertyChanged -= (sender, args) => StateHasChanged();
     }
 
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private SingletonCounter myCounter { get; set; }
     }
 }
 #pragma warning restore 1591

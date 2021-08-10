@@ -1,17 +1,25 @@
 ﻿@page "/counter"
-@inject SingletonCounter myCounter
+@implements IDisposable
 
-<h1>Counter</h1>
+<CascadingValue Value="currentCount">
+    <h1>Counter</h1>
 
-<p>Current count: @myCounter.MyCounterValue</p>
+    <p>Current count: @currentCount.Count</p>
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+    <button class="btn btn-primary" @onclick="currentCount.Increment">Click me</button>
 
-<CountChild></CountChild>
-
+    <CountChild></CountChild>
+</CascadingValue>
 @code {
-    private void IncrementCount()
+    private CountModel currentCount = new CountModel();
+    
+    protected override void OnInitialized()
     {
-        myCounter.MyCounterValue++;
+        currentCount.PropertyChanged += (sender, args) => StateHasChanged();
+    }
+    
+    public void Dispose()
+    {
+        currentCount.PropertyChanged -= (sender, args) => StateHasChanged();
     }
 }
